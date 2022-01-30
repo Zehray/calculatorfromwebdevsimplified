@@ -23,10 +23,24 @@ html, body {
 }
 .output{
     display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+    padding: 10px;
     flex-grow: 1;
     background: rgb(0, 0, 0, .75);
     width: 100%;
     height: 100px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.output .previous-operand{
+color: rgb(225, 225, 225, .75);
+font-size: 24px;
+}
+.output .current-operand{
+    color: white;
+    font-size: 40px;
 }
 .input-container{
     display: flex;
