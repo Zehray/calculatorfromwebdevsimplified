@@ -1,40 +1,68 @@
-/*
-*Since I don't want to mix our style and classes with 
- our javascript lets use data attributes instead of classes.
- So, we can say data operation and essentially we can select this data attribute in our Javascript
- to say we want to select all the data operation buttons.
+/*1- The first thing that we need to think about is 
+   how are we going to store all the information 
+   for what's number currently typed here what number is currently typed here
+   what operation is it and I think easiest way to do that is to use a class.
+   so we're going to create a calculator class .
 
- *We can do same exact thing for numbers. 
- So, we'll say data number and we're going to copy 
- this down to all of different numbers we have.
+   Let's go in here and create a class which is called a calculator and inside of this class
+   we're going to put a constructor which is going to take all the inputs 
+   for it as well as all the functions for our calculator.
+   */
 
- *And the reason again why I'm using data attributes 
-  instead of classes because it's easier to see
-  what parts of the HTML are being used by Javascript
-  and which parts are being used by the actual CSS
- 
+   /*
+   so, our constructor is essentially just going to take our previous operand text element and
+   our current text element and this is because 
+   we need to know where to place our display text for our calculator.
 
-  *And again I put the number class on the period (.) because 
-   period(.) acts just like a number for the focus 
-   of our calculator.
+2-
+next we want to think about all the operations our calculator class can come perform.
 
-   *next we want to do one for our equals button
-    so we'll just say data-equals. 
-    We're going to have one for delete data-delete
-  
-  *the lastly are all clear so data-all-clear.
+*/
 
-  *And we also need to add these to our previous operand.
-   And again I don't want to use these(previous-operand, current-operand)
-   classes since already used by our CSS.
-   We added data-previous-operand and data-current-operand
-
-    */
-
+//1
    class Calculator {
        constructor(previousOperandTextElement,currentOperandTextElement){
-           this.previousOperandTextElement = previousOperandTextElement
-           this.currentOperandTextElement = currentOperandTextElement
+           //inside of here we can set some variables for this class 
+           //this essentially gives us a way to set these text elements inside of our calculator class
+           this.previousOperandTextElement = previousOperandTextElement 
+           this.currentOperandTextElement = currentOperandTextElement   
+       }
+//2-We have the clearing function, the delete function, the adding number also we have the equals function and the adding of an operation.
+       clear() { //this is just going to clear out our different variables.
+           this.currenOperand = ''
+           this.previousOperand = ''
+           this.operation = undefined //since they don't have any operation selected if we clear things
+           this.clear()
+       }
+
+       delete() { //Next we're going to have our delete function for removing a single number.
+
+       }
+
+       appendNumber(number) { //We're going to create a function called appendNumber which is essentially 
+                              //what's going to happen every single time a user clicks on a number to add to the screen. 
+
+       }
+
+       chooseOperation(operation)  /*Next thing we need to do is to chooseOperation function.
+                                    This is what's going to happen anytime a user clicks one of 
+                                    these(÷,*,+,-,=) operations and this function needs to take 
+                                    the particular operation that the user selected.
+                                         */
+       {
+       
+    
+       }
+
+       compute() //for the last two functions that we need to have those
+                 // we need to have a compute function. And compute a single value for what we need to display on the calculator.
+       {
+
+       }
+
+       updateDisplay() //we need to have a function that allows us to update our display and this is going to update the values inside of our output.
+       {
+
        }
    }
 
@@ -46,11 +74,13 @@
    const previousOperandTextElement = document.querySelector('[data-previous-operand]')
    const currentOperandTextElement = document.querySelector('[data-current-operand]')
 
-/*The first thing that we need to think about is 
-how are we going to store all the information for
-what's number currently typed here what number is currently typed here
-what operation is it and I think easiest way to do that is to use a class
-so we're going to create a calculator class 
+/*
+3-let's we think about the different properties our calculator needs to store.
+* 3-1- We need to know the previous operand the user entered the current operand 
+that they're working on and the operation that they've if any.
 
-let's go in here and create a class which is called a calculator
+* 3-2-  inside the clear function all we need to do is 
+remove all of these values the first thing we can do to just this.currentOperand = ''
+we just want to default this to an empty string if they cleared, 
+we want to do the same thing for thiss.previousOperand = ''
 */
