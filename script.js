@@ -44,12 +44,13 @@
 
        compute() //for the last two functions that we need to have those
                  // we need to have a compute function. And compute a single value for what we need to display on the calculator.
-       {
-           let computation
+       {   //how we need to compute things as well as display things?
+           let computation //The first thing we need to do is create a variable
+                           //and this is going to be the result of our compute function.
            const prev = parseFloat(this.previousOperand)
            const current = parseFloat(this.currentOperand)
-           if(isNaN(prev) || isNaN(current)) return
-           switch(this.operation){
+           if(isNaN(prev) || isNaN(current)) return //we have to check because if the user doesn't actually enter anything and they click the equal button we don't want the code to actually run. 
+           switch(this.operation){ //switch statement is very much like a bunch of if statements chained after each other but they allow you to do a bunch of if statements on a single object.
                case '+' :
                    computation = prev + current
                    break
@@ -65,16 +66,48 @@
                 default: 
                 return  
            }
-           this.currentOperand = computation
+           this.currentOperand = computation //we can set our current operand which is just going to be equal to the result of our computation.
            this.operation = undefined
            this.previousOperand = ''
        }
 
+       /*
+       But again we still don't have the actual comma 
+       delimited values showing up as we do on this calculator.
+       we can do that with a helper function.
+        we'll call getDisplayNumber(number) and this function is just going to return that number but converted to a display value for  now wi'll just return the number given to it and  
+       we're going to call this function in updateDisplay function.
+       */
+       getDisplayNumber(number){
+           const stringNumber = number.toString()
+           const integerDigits = parseFloat(stringNumber.split('.')[0])
+           const decimalDigits = stringNumber.split('.')[1]
+           let integerDisplay
+           if (isNaN(integerDigits)) {
+               integerDisplay = ''
+           } else{
+               integerDisplay = integerDigits.toLocaleString('en', {
+                   maximumFractionDigits: 0
+               })
+           }
+           if(decimalDigits != null){
+               return `${integerDigits}.${decimalDigits}`
+           } else {
+           return integerDisplay}
+       }
+
+
        updateDisplay() //we need to have a function that allows us to update our display and this is going to update the values inside of our output.
        {
-           this.currentOperandTextElement.innerText = this.currentOperand
-           this.previousOperandTextElement.innerText = this.previousOperand
+           this.currentOperandTextElement.innerText = 
+           this.getDisplayNumber(this.currentOperand)
+           if (this.operation != null) {
+           this.previousOperandTextElement.innerText = 
+           `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+           } else {
+            this.previousOperandTextElement.innerText = ''
 
+           }
        }
    }
 
@@ -102,8 +135,8 @@ operationButtons.forEach(button => {
         calculator.updateDisplay()
     })
 })
-
-equalsButton.addEventListener('click', button => {
+//need to do now is actually work on how we need to compute things as well as display things.
+equalsButton.addEventListener('click', button => { //Let's work on our computation first to do this we're going to take that equals button that we have. And we want addEventListener to it in this case again
     calculator.compute()
     calculator.updateDisplay()
 })
